@@ -19,15 +19,9 @@
     border-radius: 50%;
     border: none;
     position: relative;
-    font-size: 0.8;
+    font-size: 0.8rem;
 }
 
-.btnContainer button span{
-    position: absolute;
-    top: 0;
-    left:2px;
-    font-size: 10px;
-}
 
 .btnContainer button:first-child {
     margin-right: 10px;

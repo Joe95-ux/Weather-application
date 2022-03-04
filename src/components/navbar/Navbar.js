@@ -13,8 +13,8 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="btnContainer">
-        <button><span>o</span>C</button>
-        <button><span>o</span>F</button>
+        <button>&#8451;</button>
+        <button>&#8457;</button>
       </div>
     </div>
   );
