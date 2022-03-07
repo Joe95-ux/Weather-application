@@ -1,0 +1,23 @@
+.dayReading{
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.4rem;
+    color: black;
+}
+
+.dayReading h1{
+    font-size: 1.3rem;
+    text-transform: capitalize;
+}
+
+.dayReading img{
+    margin:1rem 0;
+}
+
+.dayReading p{
+    font-size: 1.2rem;
+}
+.dayReading p span{
+    color: darkgrey;
+    margin-left: 10px;
+}

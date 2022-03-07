@@ -1,16 +1,16 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./navbar.css"
 
 const Navbar = () => {
   return (
     <div className="navbar">
       <div className="links">
-        <Link className="period" to="/today">
+        <NavLink className="period" to="/" activeclassname="active">
           Today
-        </Link>
-        <Link className="period" to="/week">
+        </NavLink>
+        <NavLink className="period" to="/week" activeclassname="active">
           Week
-        </Link>
+        </NavLink>
       </div>
       <div className="btnContainer">
         <button>&#8451;</button>

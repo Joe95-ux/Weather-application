@@ -1,6 +1,7 @@
 .navbar {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 .links .period {
@@ -12,6 +13,16 @@
 .links .period:first-child {
     margin-right: 1.5rem;
 }
+
+.period:hover,
+.period:active,
+.period.active {
+    border-bottom: 2px solid #40a4c8;
+    color: black;
+    font-weight: 500;
+
+}
+
 
 .btnContainer button {
     height: 1.5rem;
@@ -28,6 +39,7 @@
     background-color: black;
     color: white;
 }
-.btnContainer button:last-child{
+
+.btnContainer button:last-child {
     background-color: white;
 }

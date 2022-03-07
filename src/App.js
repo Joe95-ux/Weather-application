@@ -1,22 +1,17 @@
 import React from "react";
 import "./App.css";
-import { Link } from "react-router-dom";
-import { v4 as uuidV4 } from "uuid";
-import Navbar from "./components/navbar/Navbar";
-import SideDrawer from "./components/sideDrawer/SideDrawer";
+import { Routes, Route } from "react-router-dom";
+import Today from "./components/Today";
+import Week from "./components/Week";
 
 const App = () => {
   return (
     <div className="containerFluid">
       <div className="mainWrapper">
-        <div className="containerWrapper">
-          <div className="drawerComponent">
-            <SideDrawer />
-          </div>
-          <div className="weatherReadings">
-            <Navbar/>
-          </div>
-        </div>
+        <Routes>
+          <Route path="/" element={<Today />} />
+          <Route path="/week" element={<Week />} />
+        </Routes>
       </div>
     </div>
   );

@@ -26,7 +26,6 @@ h1{
 }
 .mainWrapper{
     max-width: 1250px;
-    padding: 2rem;
     width: 100%;
 }
 .containerWrapper{
@@ -35,12 +34,74 @@ h1{
     border-radius: 10px;
     width: 100%;
 }
-.drawerComponent{
+.sideDrawer{
     flex-basis: 30%;
     background-color: white;
     border-radius: 10px 0 0 10px;
+    padding: 2rem;
+    text-align: left;
     
 }
+
+h2, h3{
+    font-weight: 500;
+
+}
+h3{
+    font-size: 1.5rem;
+    
+}
+
+.topBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+form{
+    flex-basis: 75%;
+    width: 100%;
+}
+.inputField{
+    display: flex;
+    align-items: center;
+}
+
+.inputField input{
+    flex-basis: 90%;
+    margin-left: 10px;
+    outline: none;
+    border: none;
+    background-color: inherit;
+    font-size: 1.1rem;
+}
+.inputField input::placeholder{
+    color: black;
+}
+
+.temp{
+    margin: 2rem 0;
+    font-size: 4rem;
+}
+.date span{
+    color: grey;
+}
+hr{
+    margin: 1.5rem 0;
+}
+
+.sideDrawer p{
+    margin-bottom: 1rem;
+}
+
+.cityImageContainer{
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 10px;
+    background-color: blanchedalmond;
+}
+
 .weatherReadings{
     flex-basis: 70%;
     background-color: whitesmoke;
