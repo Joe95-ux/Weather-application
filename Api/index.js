@@ -8,11 +8,17 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/weather", (req, res) => {
-  const city = req.query.q;
+  const { q, lat, lon, cnt, units } = req.query;
   const options = {
     method: "GET",
-    url: "https://community-open-weather-map.p.rapidapi.com/climate/month",
-    params: { q: city },
+    url: "https://community-open-weather-map.p.rapidapi.com/forecast/daily",
+    params: {
+      q: q,
+      lat: lat,
+      lon: lon,
+      cnt: cnt,
+      units: units,
+    },
     headers: {
       "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
       "x-rapidapi-key": process.env.WEATHER_APP_ID,
@@ -27,16 +33,30 @@ app.get("/weather", (req, res) => {
       console.error(error);
     });
 });
-app.get("/today", async(req, res)=>{
-    try {
-        const response = await axios.get(
-          `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.IPIFY_APP_ID}`
-        );
-        res.json(response.data.location.city);
-      } catch (e) {
-        console.log(e);
-      }
-})
+app.get("/today", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.IPIFY_APP_ID}`
+    );
+    res.json(response.data.location);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+app.get("/coordinates", async (req, res) => {
+  const city = req.query.q;
+  console.log(city);
+
+  try {
+    const response = await axios.get(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.OPEN_WEATHER_APP_ID}`
+    );
+    res.json(response.data[0]);
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 const PORT = process.env.Port || 3003;
 

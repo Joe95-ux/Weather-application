@@ -10,15 +10,15 @@ import useWeather from "../hooks/useWeather";
 
 const Today = () => {
   const [city, setCity] = useState("");
-  console.log(city);
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  console.log(city, lat, lng);
   let cityRef = useRef();
 
   const getDefaultCity = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3003/today"
-      );
-      setCity(response.data);
+      const response = await axios.get("http://localhost:3003/today");
+      setCity(response.data.city);
     } catch (e) {
       console.log(e);
     }
@@ -28,7 +28,22 @@ const Today = () => {
     getDefaultCity();
   }, []);
 
-  const weatherData = useWeather(city);
+  useEffect(() => {
+    const getCoordinates = async (city) => {
+      console.log(city);
+      const url = "http://localhost:3003/coordinates?q=" + city;
+      try {
+        const response = await axios.get(url);
+        setLat(response.data.lat);
+        setLng(response.data.lon);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getCoordinates(city);
+  }, [city]);
+
+  const weatherData = useWeather(city, lat, lng);
   console.log(weatherData);
 
   const handleSubmit = (e) => {

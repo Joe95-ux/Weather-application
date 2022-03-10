@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function useWeather(city) {
+function useWeather(city,lat,lon) {
   const [weather, setWeather] = useState({});
   useEffect(() => {
     const options = {
       method: "GET",
       url: "http://localhost:3003/weather",
-      params: { q: city }
+      params: {
+        q: city,
+        lat: lat,
+        lon: lon,
+        cnt: "10",
+        units: "metric or imperial",
+      },
     };
     if (city) {
       axios
@@ -19,7 +25,7 @@ function useWeather(city) {
           console.error(error);
         });
     }
-  }, [city]);
+  }, [city,lat,lon]);
   return weather;
 }
 
