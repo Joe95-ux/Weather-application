@@ -12,13 +12,14 @@ const Today = () => {
   const [city, setCity] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  console.log(city, lat, lng);
+  
   let cityRef = useRef();
 
   const getDefaultCity = async () => {
     try {
       const response = await axios.get("http://localhost:3003/today");
-      setCity(response.data.city);
+      const defCity = await response.data.city;
+      setCity(defCity);
     } catch (e) {
       console.log(e);
     }
@@ -28,20 +29,23 @@ const Today = () => {
     getDefaultCity();
   }, []);
 
-  useEffect(() => {
-    const getCoordinates = async (city) => {
+  
+  useEffect(()=>{
+    const getCoordinates = async () => {
       console.log(city);
       const url = "http://localhost:3003/coordinates?q=" + city;
       try {
-        const response = await axios.get(url);
+        const response = await axios.request(url);
         setLat(response.data.lat);
         setLng(response.data.lon);
+        console.log(city, lat, lng);
       } catch (e) {
         console.log(e);
       }
     };
-    getCoordinates(city);
-  }, [city]);
+    getCoordinates()
+  },[city, lat, lng])
+
 
   const weatherData = useWeather(city, lat, lng);
   console.log(weatherData);
