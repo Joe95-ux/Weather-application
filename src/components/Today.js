@@ -12,14 +12,13 @@ const Today = () => {
   const [city, setCity] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  
+
   let cityRef = useRef();
 
   const getDefaultCity = async () => {
     try {
       const response = await axios.get("http://localhost:3003/today");
-      const defCity = await response.data.city;
-      setCity(defCity);
+      setCity(response.data.city);
     } catch (e) {
       console.log(e);
     }
@@ -29,25 +28,19 @@ const Today = () => {
     getDefaultCity();
   }, []);
 
-  
-  useEffect(()=>{
-    const getCoordinates = async () => {
-      console.log(city);
-      const url = "http://localhost:3003/coordinates?q=" + city;
-      try {
-        const response = await axios.request(url);
-        setLat(response.data.lat);
-        setLng(response.data.lon);
-        console.log(city, lat, lng);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getCoordinates()
-  },[city, lat, lng])
+  const getCoordinates = async (city) => {
+    console.log(city);
+    const url = "http://localhost:3003/coordinates?q=" + city;
+    try {
+      const response = await axios.request(url);
+      setLat(response.data.lat);
+      setLng(response.data.lon);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-
-  const weatherData = useWeather(city, lat, lng);
+  let weatherData = useWeather(city, lat, lng);
   console.log(weatherData);
 
   const handleSubmit = (e) => {
@@ -55,6 +48,10 @@ const Today = () => {
     setCity(cityRef.current.value);
     cityRef.current.value = "";
   };
+
+  useEffect(() => {
+    getCoordinates(city);
+  }, [city]);
 
   return (
     <div className="containerWrapper">
