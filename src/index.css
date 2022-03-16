@@ -35,12 +35,17 @@ h1{
     width: 100%;
 }
 .sideDrawer{
+    display: flex;
+    flex-direction: column;
     flex-basis: 30%;
     background-color: white;
     border-radius: 10px 0 0 10px;
     padding: 2rem;
     text-align: left;
     
+}
+.sideDrawer img{
+    align-self: center;
 }
 
 h2, h3{
@@ -82,7 +87,7 @@ form{
 
 .temp{
     margin: 2rem 0;
-    font-size: 4rem;
+    font-size: 3rem;
 }
 .date span{
     color: grey;

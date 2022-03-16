@@ -16,7 +16,7 @@ const Week = () => {
   const getDefaultCity = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3003/today"
+        "/api/today"
       );
       setCity(response.data);
     } catch (e) {

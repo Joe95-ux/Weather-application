@@ -1,19 +1,22 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const axios = require("axios");
+const axios = require("axios").default;
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/weather", (req, res) => {
-  const { q, lat, lon, cnt, units } = req.query;
+app.get("/api/weather", (req, res) => {
+  const lat = req.query.lat;
+  const lon = req.query.lon; 
+  const cnt = req.query.cnt; 
+  const units = req.query.units;  
+  console.log(req.query)
   const options = {
     method: "GET",
     url: "https://community-open-weather-map.p.rapidapi.com/forecast/daily",
     params: {
-      q: q,
       lat: lat,
       lon: lon,
       cnt: cnt,
@@ -26,14 +29,14 @@ app.get("/weather", (req, res) => {
   };
   axios
     .request(options)
-    .then(function (response) {
+    .then((response) => {
       res.json(response.data);
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.error(error);
     });
 });
-app.get("/today", async (req, res) => {
+app.get("/api/today", async (req, res) => {
   try {
     const response = await axios.get(
       `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.IPIFY_APP_ID}`
@@ -44,17 +47,18 @@ app.get("/today", async (req, res) => {
   }
 });
 
-app.get("/coordinates", async (req, res) => {
+app.get("/api/coordinates", async (req, res) => {
   const city = req.query.q;
   console.log(city);
-
-  try {
-    const response = await axios.get(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.OPEN_WEATHER_APP_ID}`
-    );
-    res.json(response.data[0]);
-  } catch (e) {
-    console.log(e);
+  if (city) {
+    try {
+      const response = await axios.get(
+        `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.OPEN_WEATHER_APP_ID}`
+      );
+      res.json(response.data[0]);
+    } catch (e) {
+      console.log(e);
+    }
   }
 });
 

@@ -6,7 +6,7 @@ function useWeather(city,lat,lon) {
   useEffect(() => {
     const options = {
       method: "GET",
-      url: "http://localhost:3003/weather",
+      url: "/api/weather",
       params: {
         q: city,
         lat: lat,
