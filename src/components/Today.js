@@ -41,6 +41,7 @@ const Today = () => {
             let data = await res.data;
             let singleDay = await data.list[0];
             let weather = await singleDay.weather[0];
+            console.log(data);
 
             setWeatherData({
               city: data.city.name,
@@ -51,7 +52,7 @@ const Today = () => {
               temperature: singleDay.temp.day,
               timestamp: singleDay.dt,
             });
-            console.log(data);
+            
             setLoading(false);
           } catch (err) {
             setLoading(false);
