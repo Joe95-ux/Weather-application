@@ -1,12 +1,17 @@
 import "./dayForcast.css";
+import {useContext} from "react";
+import { WeatherContext } from "../../context/weatherContext";
 
-const DayForcast = () => {
+
+const DayForcast = ({date,iconId,icon,maxTemp,minTemp}) => {
+  const {formatDate} =  useContext(WeatherContext);
+  const {day} = formatDate(date)
   return (
     <div className="dayReading">
-      <h1>Sun</h1>
-      <img src="" alt="weather" />
+      <h1>{day}</h1>
+      <i className={`wi wi-owm-${iconId}`} style={{fontSize:"2rem",margin:"1rem 0", color:"purple"}}></i>
       <p>
-        15<span>-3</span>
+        {Math.round(maxTemp) + "°"}<span>-{Math.round(minTemp) + "°"}</span>
       </p>
     </div>
   );

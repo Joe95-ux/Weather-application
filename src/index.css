@@ -43,6 +43,7 @@ h1{
     padding: 2rem;
     text-align: left;
     
+    
 }
 .sideDrawer img{
     align-self: center;
@@ -53,7 +54,7 @@ h2, h3{
 
 }
 h3{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     
 }
 
@@ -91,6 +92,7 @@ form{
 }
 .date span{
     color: grey;
+    font-weight: 400;
 }
 hr{
     margin: 1.5rem 0;
@@ -98,9 +100,13 @@ hr{
 
 .sideDrawer p{
     margin-bottom: 1rem;
+    text-transform: capitalize;
+    
+
 }
 
 .cityImageContainer{
+    display: flex;
     padding: 2rem;
     margin-top: 2rem;
     border-radius: 10px;

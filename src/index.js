@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import { ContextProvider } from "./context/weatherContext";
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
@@ -8,7 +9,9 @@ import "./index.css";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <ContextProvider>
+        <App />
+      </ContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { v4 as uuidV4 } from "uuid";
 import axios from "axios";
 import Navbar from "./navbar/Navbar";
@@ -6,6 +6,10 @@ import DailyHighlights from "./dailyHighlights/DailyHighlights";
 import DayForcast from "./dayForcast/DayForcast";
 import SearchIcon from "@mui/icons-material/Search";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import { WeatherContext } from "../context/weatherContext";
+import Loader from "./Loader";
+
 // import useWeather from "../hooks/useWeather";
 
 const Today = () => {
@@ -15,6 +19,7 @@ const Today = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState({});
+  const { formatDate, formatTemp } = useContext(WeatherContext);
 
   let cityRef = useRef();
 
@@ -40,6 +45,7 @@ const Today = () => {
             let res = await axios.request(options);
             let data = await res.data;
             let singleDay = await data.list[0];
+            let list = await data.list.slice(0,6);
             let weather = await singleDay.weather[0];
             console.log(data);
 
@@ -48,11 +54,14 @@ const Today = () => {
               country: data.city.country,
               description: weather.description,
               icon: weather.icon,
+              iconId:weather.id,
               main: weather.main,
-              temperature: singleDay.temp.day,
+              pop: singleDay.pop,
+              temperature: singleDay.temp,
               timestamp: singleDay.dt,
+              list:list
             });
-            
+
             setLoading(false);
           } catch (err) {
             setLoading(false);
@@ -76,6 +85,19 @@ const Today = () => {
     setCity(cityRef.current.value);
     cityRef.current.value = "";
   };
+  const { day, timeString, currentDate, dateString } = formatDate(
+    weatherData.timestamp
+  );
+  const temp = formatTemp(weatherData.temperature);
+  if (weatherData.timestamp) {
+    console.log(
+      day,
+      timeString,
+      currentDate,
+      dateString,
+      weatherData.temperature
+    );
+  }
 
   return !loading ? (
     <div className="containerWrapper">
@@ -95,15 +117,24 @@ const Today = () => {
               </form>
               <MyLocationIcon />
             </div>
-            <img src= {"http://openweathermap.org/img/wn/" + weatherData.icon + "@2x.png"} alt="weather" />
-            <h2 className="temp">{weatherData.temperature + "°C"}</h2>
+            <img
+              src={
+                "http://openweathermap.org/img/wn/" +
+                weatherData.icon +
+                "@2x.png"
+              }
+              alt="weather"
+            />
+            <h2 className="temp">{temp + "°C"}</h2>
             <h3 className="date">
-              Monday, <span>16:00</span>
+              {day}, <span>{timeString}</span>
             </h3>
             <hr />
-            <p>{weatherData.description}</p>
-            <p>{weatherData.main}</p>
+            <p><i className={`wi wi-owm-${weatherData.iconId} ${weatherData.main}`} style={{marginRight:"5px"}}></i>{weatherData.description}</p>
+            <p><i className="wi wi-rain" style={{marginRight:"5px"}}></i>Rain - {weatherData.pop}%</p>
+            
             <div className="cityImageContainer">
+              <LocationOnOutlinedIcon />
               <h3>
                 {weatherData.city}, {weatherData.country}
               </h3>
@@ -112,12 +143,16 @@ const Today = () => {
           <div className="weatherReadings">
             <Navbar />
             <div className="dayReadings">
-              <DayForcast />
-              <DayForcast />
-              <DayForcast />
-              <DayForcast />
-              <DayForcast />
-              <DayForcast />
+            {weatherData.list.map((list)=>
+              <DayForcast 
+              key={uuidV4()}
+              date={list.dt}
+              iconId={list.weather[0].id}
+              icon={list.weather[0].icon}
+              maxTemp={list.temp.max}
+              minTemp={list.temp.min}
+              />
+            )}
             </div>
             <div className="dailyHighlights">
               <h1>Today's Highlights</h1>
@@ -139,7 +174,7 @@ const Today = () => {
       )}
     </div>
   ) : (
-    <h1 style={{ textAlign: "center" }}>Fetching data!</h1>
+    <Loader/>
   );
 };
 

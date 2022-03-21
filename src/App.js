@@ -3,6 +3,8 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Today from "./components/Today";
 import Week from "./components/Week";
+import './css/weather-icons.min.css';
+import './css/weather-icons-wind.min.css';
 
 const App = () => {
   return (
