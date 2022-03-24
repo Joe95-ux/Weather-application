@@ -131,7 +131,7 @@ const Today = () => {
             </h3>
             <hr />
             <p><i className={`wi wi-owm-${weatherData.iconId} ${weatherData.main}`} style={{marginRight:"5px"}}></i>{weatherData.description}</p>
-            <p><i className="wi wi-rain" style={{marginRight:"5px"}}></i>Rain - {weatherData.pop}%</p>
+            <p><i className="wi wi-rain" style={{marginRight:"5px"}}></i>Rain - {weatherData.pop * 100}%</p>
             
             <div className="cityImageContainer">
               <LocationOnOutlinedIcon />
