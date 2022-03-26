@@ -11,6 +11,7 @@ const ContextProvider = ({ children }) => {
     let timeString;
     let currentDate;
     let month;
+    let currentTime;
     let dateString;
     let options = { month: "long" };
     const days = [
@@ -34,8 +35,9 @@ const ContextProvider = ({ children }) => {
       day = days[day];
       currentDay = currentDate.getDate();
       timeString = currentDay + " " + month + " " + hour + ":" + minutes;
+      currentTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
-    return { day, timeString, currentDate, dateString };
+    return { day, timeString, currentDate, dateString, currentTime };
   };
   const formatTemp = (tempObject) => {
     

@@ -59,6 +59,8 @@ const Today = () => {
               pop: singleDay.pop,
               temperature: singleDay.temp,
               timestamp: singleDay.dt,
+              sunrise:singleDay.sunrise,
+              sunset:singleDay.sunset,
               list:list
             });
 
@@ -157,12 +159,12 @@ const Today = () => {
             <div className="dailyHighlights">
               <h1>Today's Highlights</h1>
               <div className="highlightsWrapper">
-                <DailyHighlights />
-                <DailyHighlights />
-                <DailyHighlights />
-                <DailyHighlights />
-                <DailyHighlights />
-                <DailyHighlights />
+                <DailyHighlights title = "Sunrise & Sunset" sunrise = {weatherData.sunrise} sunset= {weatherData.sunset} />
+                <DailyHighlights title ="Humidity" />
+                <DailyHighlights title = "Wind Status" />
+                <DailyHighlights title = "UV Index"/>
+                <DailyHighlights title = "Visibility"/>
+                <DailyHighlights title = "Air Quality"/>
               </div>
             </div>
           </div>

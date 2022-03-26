@@ -13,9 +13,26 @@
 }
 .highlight h2{
     font-size: 1.4rem;
-    margin-bottom: 1.5rem;
+    
 }
 .highlight h2 span{
     font-size: 0.8rem;
     margin-left: 5px;
+}
+
+.sunriseAndSunset{
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+}
+.sunriseAndSunset div{
+    display: flex;
+    align-items: center;
+}
+.arrow{
+    margin-right: 12px;
+    padding: 5px;
+    background-color: rgb(255, 217, 0);
+    border: 2px solid rgb(211, 180, 8);
+    border-radius: 50%;
 }
