@@ -61,7 +61,8 @@ const Today = () => {
               timestamp: singleDay.dt,
               sunrise:singleDay.sunrise,
               sunset:singleDay.sunset,
-              list:list
+              list:list,
+              humidity: singleDay.humidity
             });
 
             setLoading(false);
@@ -123,7 +124,7 @@ const Today = () => {
               src={
                 "http://openweathermap.org/img/wn/" +
                 weatherData.icon +
-                "@2x.png"
+                "@4x.png"
               }
               alt="weather"
             />
@@ -160,7 +161,7 @@ const Today = () => {
               <h1>Today's Highlights</h1>
               <div className="highlightsWrapper">
                 <DailyHighlights title = "Sunrise & Sunset" sunrise = {weatherData.sunrise} sunset= {weatherData.sunset} />
-                <DailyHighlights title ="Humidity" />
+                <DailyHighlights title ="Humidity" humidity = {weatherData.humidity}/>
                 <DailyHighlights title = "Wind Status" />
                 <DailyHighlights title = "UV Index"/>
                 <DailyHighlights title = "Visibility"/>

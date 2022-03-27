@@ -4,6 +4,8 @@
     background-color: white;
     color: black;
     border-radius: 10px;
+    position: relative;
+    width: 100%;
 }
 
 .highlight h3{
@@ -35,4 +37,30 @@
     background-color: rgb(255, 217, 0);
     border: 2px solid rgb(211, 180, 8);
     border-radius: 50%;
+}
+.humidity{
+    display: flex;
+    align-items: center;
+}
+
+.lineContainer{
+    margin-top: 1rem;
+}
+.readings{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.lineContainerInner{
+    height: 10px;
+    width: 100%;
+    border-radius: 55px;
+    box-shadow: 0px 2px 2px #ccc;
+    position: relative;
+    background-color: rgb(243, 240, 240);
+}
+
+.percentage{
+    display: flex;
+    justify-content: flex-end;
 }
