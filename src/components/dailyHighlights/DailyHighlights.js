@@ -6,7 +6,7 @@ import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined
 import styled from "styled-components";
 
 const Gage = styled.div`
-    background: purple;
+    background: #40a4c8;
     width: ${props=>props.humidity}%;
     border-radius: 55px;
     height: 100%;

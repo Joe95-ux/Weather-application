@@ -10,7 +10,7 @@ const DayForcast = ({ date, iconId, icon, maxTemp, minTemp }) => {
       <h1>{day}</h1>
       <i
         className={`wi wi-owm-${iconId}`}
-        style={{ fontSize: "2rem", margin: "1rem 0", color: "purple" }}
+        style={{ fontSize: "2rem", margin: "1rem 0", color: "#40a4c8" }}
       ></i>
       <div className="highAndLowTemp">
         <p>{Math.round(maxTemp) + "°"}</p>

@@ -122,13 +122,6 @@ hr{
     
     
 }
-.dayReadings{
-    display: flex;
-    justify-content: space-between;
-}
-.dayReadings >*:not(:last-child){
-    margin-right: 8px;
-}
 
 .dailyHighlights{
     margin-top: 2rem;

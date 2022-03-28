@@ -1,6 +1,7 @@
 .dayReading{
     display: flex;
     flex-direction: column;
+    flex: 1;
     justify-items: center;
     align-items: center;
     background-color: white;
