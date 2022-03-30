@@ -64,3 +64,20 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.wind h1, .pressure h1{
+    font-size: 2rem;
+    margin-right: 5px;
+}
+.wind span, .pressure span{
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+.tempHighlight h1{
+    font-size: 1.4rem;
+}
+.tempHighlight p{
+    font-size: 1.3rem;
+    margin-top: 1.3rem;
+    
+}

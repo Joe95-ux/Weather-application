@@ -62,6 +62,8 @@ const Today = () => {
               sunrise:singleDay.sunrise,
               sunset:singleDay.sunset,
               list:list,
+              windSpeed:singleDay.speed,
+              pressure:singleDay.pressure,
               humidity: singleDay.humidity
             });
 
@@ -162,10 +164,10 @@ const Today = () => {
               <div className="highlightsWrapper">
                 <DailyHighlights title = "Sunrise & Sunset" sunrise = {weatherData.sunrise} sunset= {weatherData.sunset} />
                 <DailyHighlights title ="Humidity" humidity = {weatherData.humidity}/>
-                <DailyHighlights title = "Wind Status" />
-                <DailyHighlights title = "UV Index"/>
+                <DailyHighlights title = "Wind Status" speed = {weatherData.windSpeed} />
+                <DailyHighlights title = "Air Pressure" pressure = {weatherData.pressure}/>
                 <DailyHighlights title = "Visibility"/>
-                <DailyHighlights title = "Air Quality"/>
+                <DailyHighlights title = "Temperature" max={weatherData.temperature.max} min={weatherData.temperature.min}/>
               </div>
             </div>
           </div>

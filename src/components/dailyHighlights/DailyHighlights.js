@@ -6,17 +6,26 @@ import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined
 import styled from "styled-components";
 
 const Gage = styled.div`
-    background: #40a4c8;
-    width: ${props=>props.humidity}%;
-    border-radius: 55px;
-    height: 100%;
-  `;
+  background: #40a4c8;
+  width: ${(props) => props.humidity}%;
+  border-radius: 55px;
+  height: 100%;
+`;
 
-const DailyHighlights = ({ title, sunrise, sunset, humidity }) => {
+const DailyHighlights = ({
+  title,
+  sunrise,
+  sunset,
+  humidity,
+  speed,
+  pressure,
+  max,
+  min,
+}) => {
   const { formatDate } = useContext(WeatherContext);
   const { currentTime: sunRise } = formatDate(sunrise);
   const { currentTime: sunSet } = formatDate(sunset);
-  
+
   return (
     <div className="highlight">
       <h3>{title}</h3>
@@ -47,10 +56,37 @@ const DailyHighlights = ({ title, sunrise, sunset, humidity }) => {
             <div className="lineContainerInner">
               <Gage humidity={humidity}></Gage>
             </div>
-            <div className="percentage"><p className="percentageContent">%</p></div>
-            
+            <div className="percentage">
+              <p className="percentageContent">%</p>
+            </div>
           </div>
         </>
+      )}
+      {speed && (
+        <div className="wind">
+          <h1>
+            {speed} <span>km/h</span>
+          </h1>
+        </div>
+      )}
+      {pressure && (
+        <div className="pressure">
+          <h1>
+            {pressure} <span>mb</span>
+          </h1>
+        </div>
+      )}
+      {max && (
+        <div className="tempHighlight">
+          <h2>
+            <i
+              className="wi wi-thermometer"
+              style={{ marginRight: "12px" }}
+            ></i>{" "}
+            High/Low
+          </h2>
+          <p>{Math.round(max) + "°"}/{Math.round(min) + "°"}</p>
+        </div>
       )}
     </div>
   );
