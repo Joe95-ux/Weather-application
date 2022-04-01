@@ -44,27 +44,31 @@ const Today = () => {
           try {
             let res = await axios.request(options);
             let data = await res.data;
-            let singleDay = await data.list[0];
-            let list = await data.list.slice(0,6);
-            let weather = await singleDay.weather[0];
-            console.log(data);
+            let currentRes = await axios.get(`/api/currentWeather?lat=${coords.latitude}&lon=${coords.longitude}&units=metric`);
+            let currentData = await currentRes.data;
+            let current = await currentData.current;
+            let list = await currentData.daily.slice(0,6);
+            console.log(currentRes.data,data);
+
 
             setWeatherData({
               city: data.city.name,
               country: data.city.country,
-              description: weather.description,
-              icon: weather.icon,
-              iconId:weather.id,
-              main: weather.main,
-              pop: singleDay.pop,
-              temperature: singleDay.temp,
-              timestamp: singleDay.dt,
-              sunrise:singleDay.sunrise,
-              sunset:singleDay.sunset,
+              description: current.weather[0].description,
+              icon: current.weather[0].icon,
+              iconId:current.weather[0].id,
+              main: current.weather.main,
+              pop: currentData.daily[0].pop,
+              temperature: current.temp,
+              tempObj:currentData.daily[0].temp,
+              timestamp: current.dt,
+              sunrise:current.sunrise,
+              sunset:current.sunset,
               list:list,
-              windSpeed:singleDay.speed,
-              pressure:singleDay.pressure,
-              humidity: singleDay.humidity
+              current:current,
+              windSpeed:current.wind_speed,
+              pressure:current.pressure,
+              humidity: current.humidity
             });
 
             setLoading(false);
@@ -93,7 +97,7 @@ const Today = () => {
   const { day, timeString, currentDate, dateString } = formatDate(
     weatherData.timestamp
   );
-  const temp = formatTemp(weatherData.temperature);
+  const temp = formatTemp(weatherData.tempObj);
   if (weatherData.timestamp) {
     console.log(
       day,
@@ -166,8 +170,8 @@ const Today = () => {
                 <DailyHighlights title ="Humidity" humidity = {weatherData.humidity}/>
                 <DailyHighlights title = "Wind Status" speed = {weatherData.windSpeed} />
                 <DailyHighlights title = "Air Pressure" pressure = {weatherData.pressure}/>
-                <DailyHighlights title = "Visibility"/>
-                <DailyHighlights title = "Temperature" max={weatherData.temperature.max} min={weatherData.temperature.min}/>
+                <DailyHighlights title = "Visibility $ Uv Index" uvi ={weatherData.current.uvi} vis ={weatherData.current.visibility}/>
+                <DailyHighlights title = "Temperature" max={weatherData.tempObj.max} min={weatherData.tempObj.min}/>
               </div>
             </div>
           </div>

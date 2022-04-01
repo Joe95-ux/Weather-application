@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { WeatherContext } from "../../context/weatherContext";
 import ArrowUpwardOutlinedIcon from "@mui/icons-material/ArrowUpwardOutlined";
 import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import styled from "styled-components";
 
 const Gage = styled.div`
@@ -21,6 +23,8 @@ const DailyHighlights = ({
   pressure,
   max,
   min,
+  uvi,
+  vis,
 }) => {
   const { formatDate } = useContext(WeatherContext);
   const { currentTime: sunRise } = formatDate(sunrise);
@@ -85,7 +89,27 @@ const DailyHighlights = ({
             ></i>{" "}
             High/Low
           </h2>
-          <p>{Math.round(max) + "°"}/{Math.round(min) + "°"}</p>
+          <p>
+            {Math.round(max) + "°"}/{Math.round(min) + "°"}
+          </p>
+        </div>
+      )}
+      {vis && (
+        <div className="visAndUvi">
+          <div className="vis">
+            <div>
+              <VisibilityOutlinedIcon />
+              <h4>Visibility</h4>
+            </div>
+            <div>{vis / 1000} km</div>
+          </div>
+          <div className="uvi">
+            <div>
+              <WbSunnyOutlinedIcon />
+              <h4>Uv Index</h4>
+            </div>
+            <div>{uvi} of 10</div>
+          </div>
         </div>
       )}
     </div>

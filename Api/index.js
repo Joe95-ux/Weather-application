@@ -39,6 +39,22 @@ app.get("/api/weather", (req, res) => {
       console.error(error);
     });
 });
+
+app.get("/api/currentWeather", async (req, res) => {
+  const lat = req.query.lat;
+  const lon = req.query.lon;
+  const units = req.query.units;
+  console.log(req.query);
+  try {
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${units}&appid=${process.env.OPEN_WEATHER_APP_ID}`
+    );
+    res.json(response.data);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 app.get("/api/today", async (req, res) => {
   try {
     const response = await axios.get(
